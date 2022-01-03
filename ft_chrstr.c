@@ -11,7 +11,10 @@ void	ft_print_chars(char flag, va_list ptr)
 	{
 		str = va_arg(ptr, char *);
 		if(!str && strc.dot != -1)
+		{
 			ft_print_ch(' ', strc.minfild);
+			ft_print_str(str, strc.dot);
+		}
 		else if(!str && strc.dot == -1)
 			ft_putstr(str, 0);
 		else

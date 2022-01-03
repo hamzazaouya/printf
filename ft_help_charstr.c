@@ -31,7 +31,8 @@ void	ft_putstr(char *str, int len)
 
 	i = 0;
 	if(!str)
-		ft_putstr("(null)", 6);
-	while(i < len)
-		ft_putchar(str[i++]);
+		ft_putstr("(null)", len);
+	else
+		while(i < len && str[i])
+			ft_putchar(str[i++]);
 }

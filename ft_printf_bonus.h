@@ -6,7 +6,7 @@
 /*   By: hazaouya <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/30 14:10:20 by hazaouya          #+#    #+#             */
-/*   Updated: 2022/01/03 16:57:13 by hazaouya         ###   ########.fr       */
+/*   Updated: 2022/01/03 21:09:51 by hazaouya         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,12 +42,12 @@ int		ft_strlen(char *str);
 void	ft_putstr(char *str, int len);
 void	ft_putchar(char c);
 void	ft_print_ch(char c, int len);
-int		ft_get_glblen(int num);
+unsigned long ft_get_glblen(unsigned long num);
 void	ft_decimal(va_list ptr);
 void	ft_putnbr(unsigned long int nbr, int base, int alpha);
-void	ft_putdgt(unsigned long num, int flag);
+void	ft_putdgt(unsigned long num, int flag, int base, int alpha);
 int		ft_dcml_len(unsigned long nbr);
 void	ft_check_sign(int num);
-void	ft_putdgt_dots(int dgt_len, int num);
+void	ft_putdgt_dots(int dgt_len, unsigned long num);
 void	ft_putdgt_zeros(int dgt_len, int flag);
 #endif

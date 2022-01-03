@@ -1,7 +1,10 @@
-#include "ft_printf_bonus.c"
+#include "ft_printf_bonus.h"
 
 int main(void)
 {
-	//ft_printf("|%.d|\n", -0);
-	printf("|%.d|\n", -0);
+	char *str = NULL;
+	ft_printf("|%-25.1d|\n", 0);
+	printf("|%-25.1d|\n", 0);
+	//ft_printf("Hello |%+10.5d| Hello\n", 10);
+	//printf("Hello |%+10.5d| Hello\n", 10);
 }

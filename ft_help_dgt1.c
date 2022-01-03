@@ -6,11 +6,26 @@
 /*   By: hazaouya <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/03 16:19:22 by hazaouya          #+#    #+#             */
-/*   Updated: 2022/01/03 16:57:28 by hazaouya         ###   ########.fr       */
+/*   Updated: 2022/01/03 21:39:57 by hazaouya         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf_bonus.h"
+
+int	ft_dcml_len(unsigned long nbr)
+{
+	int	i;
+
+	i = 0;
+	if (!nbr)
+		return (1);
+	while (nbr > 0)
+	{
+		i++;
+		nbr /= 10;
+	}
+	return (i);
+}
 
 void	ft_putnbr(unsigned long int nbr, int base, int alpha)
 {
@@ -22,15 +37,7 @@ void	ft_putnbr(unsigned long int nbr, int base, int alpha)
 		ft_putchar((nbr % base) + '0');
 }
 
-void	ft_check_sign(int num)
-{
-	if(num < 0)
-		ft_putnbr((unsigned) -num, 10, 0);
-	else
-		ft_putnbr(num, 10, 0);
-}
-
-void	ft_putdgt_dots(int dgt_len, int num)
+void	ft_putdgt_dots(int dgt_len, unsigned long num)
 {
 	if(!strc.dot && !num && !strc.minfild)
 		return ;
@@ -46,7 +53,7 @@ void ft_putdgt_zeros(int dgt_len, int flag)
 		ft_print_ch('0', strc.zero - dgt_len);
 }
 
-void	ft_putdgt(unsigned long num, int flag)
+void	ft_putdgt(unsigned long num, int flag, int base, int alpha)
 {
 	int dgt_len;
 
@@ -59,8 +66,6 @@ void	ft_putdgt(unsigned long num, int flag)
 	ft_putdgt_dots(dgt_len, num);
 	else if(strc.zero)
 		ft_putdgt_zeros(dgt_len, flag);
-	if(!strc.dot  && !num)
-		return ;
-	else
-		ft_check_sign(num);
+	if (!(!strc.dot && !num))
+		ft_putnbr(num, base, alpha);
 }
