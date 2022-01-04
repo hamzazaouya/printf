@@ -6,7 +6,7 @@
 /*   By: hazaouya <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/19 14:42:38 by hazaouya          #+#    #+#             */
-/*   Updated: 2022/01/03 21:27:16 by hazaouya         ###   ########.fr       */
+/*   Updated: 2022/01/04 18:36:54 by hazaouya         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,8 +72,18 @@ void	ft_print_flags(char flag, va_list	ptr)
 		ft_print_chars(flag, ptr);
 	else if (flag == 'd' || flag == 'i')
 		ft_decimal(ptr);
-	/*else if (c == 'x' || c == 'X' || c == 'u')
-		ft_unsigned(c, ptr);
-	else if (c == 'p')
-		ft_address(ptr);*/
+	else if (flag == 'x' || flag == 'X' || flag == 'u')
+		ft_u_decimal(flag, ptr);
+	else if (flag == 'p')
+		ft_putptr(ptr);
+}
+
+void	ft_putnbr(unsigned long int nbr, int base, int alpha)
+{
+	if (nbr >= (unsigned long int)base)
+		ft_putnbr(nbr / base, base, alpha);
+	if ((nbr % base) >= 10)
+		ft_putchar((nbr % base) + (alpha - 10));
+	else
+		ft_putchar((nbr % base) + '0' );
 }

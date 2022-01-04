@@ -6,11 +6,17 @@
 /*   By: hazaouya <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/18 15:06:12 by hazaouya          #+#    #+#             */
-/*   Updated: 2022/01/03 16:46:57 by hazaouya         ###   ########.fr       */
+/*   Updated: 2022/01/04 18:28:53 by hazaouya         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf_bonus.h"
+
+void	ft_putchar(char c)
+{
+	g_count++;
+	write(1, &c, 1);
+}
 
 void	ft_init(void)
 {
@@ -25,19 +31,21 @@ void	ft_init(void)
 
 int	ft_get_str(char *str, va_list ptr)
 {
-	int i;
+	int	i;
 
 	i = 0;
-	while((str[i]	>= '0' && str[i] <= '9') || str[i] == '-' || str[i] == '+' ||\
-			str[i] == '#' || str[i] == ' ' || str[i] == '.')
+	while ((str[i] >= '0' && str[i] <= '9') || str[i] == '-' || \
+				str[i] == '+' || str[i] == '#' || str[i] == ' ' || \
+				str[i] == '.')
 	{
-		if((str[i] >= '0' && str[i] <= '9') || str[i] == '.')
+		if ((str[i] >= '0' && str[i] <= '9') || str[i] == '.')
 			ft_zero_flag(str, &i);
 		else
 			ft_other_flag(str[i]);
 		i++;
 	}
-	if (!i ||str[i - 1] == '+' || str[i - 1] == '-' || str[i - 1] == ' ')
+	if (!i || str[i - 1] == '+' || str[i - 1] == '-' || str[i - 1] == ' ' || \
+			str[i -1] == '#')
 		i++;
 	ft_print_flags(str[--i], ptr);
 	return (i + 1);
@@ -49,9 +57,9 @@ int	ft_printf(const char *str, ...)
 
 	g_count = 0;
 	va_start(ptr, str);
-	while(*str)
+	while (*str)
 	{
-		if(*str == '%')
+		if (*str == '%')
 		{
 			ft_init();
 			str += ft_get_str((char *)str + 1, ptr);
