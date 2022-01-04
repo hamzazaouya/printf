@@ -6,7 +6,7 @@
 /*   By: hazaouya <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/03 16:19:22 by hazaouya          #+#    #+#             */
-/*   Updated: 2022/01/04 20:42:09 by hazaouya         ###   ########.fr       */
+/*   Updated: 2022/01/04 22:49:14 by hazaouya         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,18 +64,23 @@ void	ft_putdgt(unsigned long num, int sign, int base, int alpha)
 	int	dgt_len;
 
 	dgt_len = ft_dcml_len(num, base);
+	
 	if (alpha == 'A' && strc.hash && num)
 		ft_putstr("0X", 2);
 	else if ((alpha == 'a' && strc.hash && num) || alpha == 'p')
 		ft_putstr("0x", 2);
-	if ((!strc.dot && !num && strc.minfild) || strc.space)
+	if ((!strc.dot && !num && strc.minfild) || (strc.space && !sign))
 		ft_putchar(' ');
 	else if (!sign && strc.plus)
 		ft_putchar('+');
 	if (strc.dot > -1)
 		ft_putdgt_dots(dgt_len, num);
 	else if (strc.zero)
+	{
+		if (sign)
+			dgt_len++;
 		ft_putdgt_zeros(dgt_len, sign, alpha);
+	}
 	if (!(!strc.dot && !num))
 		ft_putnbr(num, base, alpha);
 }

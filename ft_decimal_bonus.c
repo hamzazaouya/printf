@@ -6,7 +6,7 @@
 /*   By: hazaouya <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/04 15:15:43 by hazaouya          #+#    #+#             */
-/*   Updated: 2022/01/04 18:32:50 by hazaouya         ###   ########.fr       */
+/*   Updated: 2022/01/04 22:49:22 by hazaouya         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,11 +61,11 @@ void	ft_u_decimal(char flag, va_list ptr)
 	num = va_arg(ptr, unsigned int);
 	len = ft_get_glblen(num, base, flag, 0);
 	if (strc.minus)
-		ft_putdgt(num, 1, base, flag);
+		ft_putdgt(num, 0, base, flag);
 	if (strc.minfild && !strc.zero)
 		ft_print_ch(' ', strc.minfild - len);
 	if (!strc.minus)
-		ft_putdgt(num, 1, base, flag);
+		ft_putdgt(num, 0, base, flag);
 }
 
 void	ft_putptr(va_list ptr)

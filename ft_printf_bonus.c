@@ -6,7 +6,7 @@
 /*   By: hazaouya <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/18 15:06:12 by hazaouya          #+#    #+#             */
-/*   Updated: 2022/01/04 18:28:53 by hazaouya         ###   ########.fr       */
+/*   Updated: 2022/01/04 22:13:30 by hazaouya         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,13 +41,12 @@ int	ft_get_str(char *str, va_list ptr)
 		if ((str[i] >= '0' && str[i] <= '9') || str[i] == '.')
 			ft_zero_flag(str, &i);
 		else
-			ft_other_flag(str[i]);
-		i++;
+			ft_other_flag(str[i++]);
 	}
-	if (!i || str[i - 1] == '+' || str[i - 1] == '-' || str[i - 1] == ' ' || \
-			str[i -1] == '#')
-		i++;
-	ft_print_flags(str[--i], ptr);
+	//if (!i || str[i - 1] == '+' || str[i - 1] == '-' || str[i - 1] == ' ' || \
+	//		str[i -1] == '#')
+	//	i++;
+	ft_print_flags(str[i], ptr);
 	return (i + 1);
 }
 

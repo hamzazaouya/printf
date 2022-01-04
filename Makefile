@@ -4,7 +4,7 @@ SRCB =ft_chrstr_bonus.c\
 	  ft_decimal_bonus.c\
 	  ft_help_dgt_bonus.c\
 	  ft_make_dsg_bonus.c\
-	  ft_printf_bonus.c\
+	  ft_printf_bonus.c ft_help_charstr_bonus.c
 CC = cc
 
 CFLAGS = -Wall -Wextra -Werror
@@ -13,8 +13,8 @@ OBJB := $(SRCB:.c=.o)
 
 all : $(NAME)
 
-bonus : $(OBJB)
-	ar -rc $(NAME) $(OBJB)
+bonus : $(OBJB) 
+	ar -rc  $(NAME) $(OBJB)
 
 $(NAME) : $(OBJM)  
 	ar -rc $(NAME) $(OBJM)
