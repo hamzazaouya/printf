@@ -6,7 +6,7 @@
 /*   By: hazaouya <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/19 14:42:38 by hazaouya          #+#    #+#             */
-/*   Updated: 2022/01/05 11:52:37 by hazaouya         ###   ########.fr       */
+/*   Updated: 2022/01/05 14:12:00 by hazaouya         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,9 +80,9 @@ void	ft_print_flags(char flag, va_list	ptr)
 
 void	ft_putnbr(unsigned long int nbr, int base, int alpha)
 {
-	if(nbr >= (unsigned long int) base)
+	if (nbr >= (unsigned long int) base)
 		ft_putnbr(nbr / base, base, alpha);
-	if(nbr % base >= 10)
+	if (nbr % base >= 10)
 		ft_putchar (nbr % base - 10 + alpha);
 	else
 		ft_putchar(nbr % base + '0');

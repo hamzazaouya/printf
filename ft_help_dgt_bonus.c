@@ -6,15 +6,15 @@
 /*   By: hazaouya <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/03 16:19:22 by hazaouya          #+#    #+#             */
-/*   Updated: 2022/01/05 11:52:58 by hazaouya         ###   ########.fr       */
+/*   Updated: 2022/01/05 14:02:48 by hazaouya         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf_bonus.h"
 
-unsigned long	ft_get_glblen(unsigned long num, int base, int flag, int sign)
+int	ft_get_glblen(unsigned long num, int base, int flag, int sign)
 {
-	unsigned long	len;
+	int	len;
 
 	len = ft_dcml_len(num, base);
 	if (strc.dot != -1 && strc.dot > (int) len)
@@ -68,7 +68,7 @@ void	ft_putdgt(unsigned long num, int sign, int base, int alpha)
 		ft_putstr("0X", 2);
 	else if ((alpha == 'a' && strc.hash && num) || alpha == 'p')
 		ft_putstr("0x", 2);
-	if(alpha == 'p')
+	if (alpha == 'p')
 		alpha = 'a';
 	if ((!strc.dot && !num && strc.minfild) || (strc.space && !sign))
 		ft_putchar(' ');

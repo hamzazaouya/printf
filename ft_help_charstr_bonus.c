@@ -6,7 +6,7 @@
 /*   By: hazaouya <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/04 18:25:58 by hazaouya          #+#    #+#             */
-/*   Updated: 2022/01/05 10:36:24 by hazaouya         ###   ########.fr       */
+/*   Updated: 2022/01/05 14:12:20 by hazaouya         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,16 +25,6 @@ void	ft_print_ch(char c, int len)
 	i = 0;
 	while (i++ < len)
 		ft_putchar(c);
-}
-
-int	ft_strlen(char *str)
-{
-	int	i;
-
-	i = 0;
-	while (str[i])
-		i++;
-	return (i);
 }
 
 void	ft_putstr(char *str, int len)
