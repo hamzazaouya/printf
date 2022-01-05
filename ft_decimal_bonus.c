@@ -6,7 +6,7 @@
 /*   By: hazaouya <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/04 15:15:43 by hazaouya          #+#    #+#             */
-/*   Updated: 2022/01/04 22:49:22 by hazaouya         ###   ########.fr       */
+/*   Updated: 2022/01/05 11:52:49 by hazaouya         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,9 +76,9 @@ void	ft_putptr(va_list ptr)
 	num = va_arg(ptr, unsigned long);
 	len = ft_get_glblen(num, 16, 'p', 0);
 	if (strc.minus)
-		ft_putdgt(num, 1, 16, 'p');
+		ft_putdgt(num, 0, 16, 'p');
 	if (strc.minfild && !strc.zero)
 		ft_print_ch(' ', strc.minfild - len);
 	if (!strc.minus)
-		ft_putdgt(num, 1, 16, 'p');
+		ft_putdgt(num, 0, 16, 'p');
 }
