@@ -6,24 +6,26 @@
 /*   By: hazaouya <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/03 16:19:22 by hazaouya          #+#    #+#             */
-/*   Updated: 2022/01/05 14:02:48 by hazaouya         ###   ########.fr       */
+/*   Updated: 2022/01/05 19:33:03 by hazaouya         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf_bonus.h"
 
-int	ft_get_glblen(unsigned long num, int base, int flag, int sign)
+int	ft_get_glblen(unsigned long num, t_struct *strc)
 {
 	int	len;
 
-	len = ft_dcml_len(num, base);
-	if (strc.dot != -1 && strc.dot > (int) len)
-		len = strc.dot;
-	else if (strc.zero && strc.zero > (int) len)
-		len = strc.zero;
-	if ((strc.plus && !sign && (flag != 'a' || flag != 'A')) || strc.space)
+	len = ft_dcml_len(num, strc->base);
+	if (strc->dot != -1 && strc->dot > (int) len)
+		len = strc->dot;
+	else if (strc->zero && strc->zero > (int) len)
+		len = strc->zero;
+	if ((strc->plus && !strc->sign && (strc->flag != 'x' || \
+					strc->flag != 'X')) || strc->space)
 		len++;
-	if (((flag == 'A' || flag == 'a') && strc.hash && num) || flag == 'p')
+	if (((strc->flag == 'X' || strc->flag == 'x') && strc->hash && num) || \
+		   	strc->flag == 'p')
 		len += 2;
 	return (len);
 }
@@ -43,45 +45,44 @@ int	ft_dcml_len(unsigned long nbr, int base)
 	return (i);
 }
 
-void	ft_putdgt_dots(int dgt_len, unsigned long num)
+void	ft_putdgt_dots(int dgt_len, unsigned long num, t_struct *strc)
 {
-	if (!strc.dot && !num && !strc.minfild)
+	if (!strc->dot && !num && !strc->minfild)
 		return ;
-	else if (strc.dot > 0)
-		ft_print_ch('0', strc.dot - dgt_len);
+	else if (strc->dot > 0)
+		ft_print_ch('0', strc->dot - dgt_len, strc);
 }
 
-void	ft_putdgt_zeros(int dgt_len, int sign, int flag)
+void	ft_putdgt_zeros(int dgt_len, t_struct *strc)
 {
-	if (sign && (flag == 'd' || flag == 'i'))
-		ft_print_ch('0', strc.zero - dgt_len - 1);
+	if (strc->sign && (strc->flag == 'd' || strc->flag == 'i'))
+		ft_print_ch('0', strc->zero - dgt_len - 1, strc);
 	else
-		ft_print_ch('0', strc.zero - dgt_len);
+		ft_print_ch('0', strc->zero - dgt_len, strc);
 }
 
-void	ft_putdgt(unsigned long num, int sign, int base, int alpha)
+void	ft_putdgt(unsigned long num, t_struct *strc)
 {
 	int	dgt_len;
+	int alpha;
 
-	dgt_len = ft_dcml_len(num, base);
-	if (alpha == 'A' && strc.hash && num)
-		ft_putstr("0X", 2);
-	else if ((alpha == 'a' && strc.hash && num) || alpha == 'p')
-		ft_putstr("0x", 2);
-	if (alpha == 'p')
-		alpha = 'a';
-	if ((!strc.dot && !num && strc.minfild) || (strc.space && !sign))
-		ft_putchar(' ');
-	else if (!sign && strc.plus)
-		ft_putchar('+');
-	if (strc.dot > -1)
-		ft_putdgt_dots(dgt_len, num);
-	else if (strc.zero)
+	dgt_len = ft_dcml_len(num, strc->base);
+	if (strc->alpha == 'A' && strc->hash && num)
+		ft_putstr("0X", 2, strc);
+	else if ((strc->alpha == 'a' && strc->hash && num) || strc->flag == 'p')
+		ft_putstr("0x", 2, strc);
+	if ((!strc->dot && !num && strc->minfild) || (strc->space && strc->sign))
+		ft_putchar(' ', strc);
+	else if (strc->sign && strc->plus)
+		ft_putchar('+', strc);
+	if (strc->dot > -1)
+		ft_putdgt_dots(dgt_len, num, strc);
+	else if (strc->zero)
 	{
-		if (sign)
+		if (strc->sign)
 			dgt_len++;
-		ft_putdgt_zeros(dgt_len, sign, alpha);
+		ft_putdgt_zeros(dgt_len, strc);
 	}
-	if (!(!strc.dot && !num))
-		ft_putnbr(num, base, alpha);
+	if (!(!strc->dot && !num))
+		ft_putnbr(num, strc);
 }

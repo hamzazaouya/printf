@@ -6,7 +6,7 @@
 /*   By: hazaouya <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/19 14:42:38 by hazaouya          #+#    #+#             */
-/*   Updated: 2022/01/05 14:12:00 by hazaouya         ###   ########.fr       */
+/*   Updated: 2022/01/05 19:33:06 by hazaouya         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ int	ft_atoi(char *str, int *index)
 	return (nb);
 }
 
-void	ft_zero_flag(char *str, int *i)
+void	ft_zero_flag(char *str, int *i, t_struct *strc)
 {
 	int	nb;
 
@@ -38,52 +38,52 @@ void	ft_zero_flag(char *str, int *i)
 		nb = ft_atoi(str + (*i), i);
 		if (str[*i] == '.')
 		{
-			strc.minfild = nb;
-			strc.dot = ft_atoi(str + (++(*i)), i);
+			strc->minfild = nb;
+			strc->dot = ft_atoi(str + (++(*i)), i);
 		}
 		else
-			strc.zero = nb;
+			strc->zero = nb;
 	}
 	else if (str[*i] == '.')
-		strc.dot = ft_atoi(str + (++(*i)), i);
+		strc->dot = ft_atoi(str + (++(*i)), i);
 	else
 	{
-		strc.minfild = ft_atoi(str + *i, i);
+		strc->minfild = ft_atoi(str + *i, i);
 		if (str[*i] == '.')
-			strc.dot = ft_atoi(str + (++(*i)), i);
+			strc->dot = ft_atoi(str + (++(*i)), i);
 	}
 }
 
-void	ft_other_flag(char c)
+void	ft_other_flag(char c, t_struct *strc)
 {
 	if (c == '-')
-		strc.minus = 1;
+		strc->minus = 1;
 	else if (c == '+')
-		strc.plus = 1;
+		strc->plus = 1;
 	else if (c == '#')
-		strc.hash = 1;
+		strc->hash = 1;
 	else if (c == ' ')
-		strc.space = 1;
+		strc->space = 1;
 }
 
-void	ft_print_flags(char flag, va_list	ptr)
+void	ft_print_flags(va_list	ptr, t_struct *strc)
 {
-	if (flag == 's' || flag == 'c')
-		ft_print_chars(flag, ptr);
-	else if (flag == 'd' || flag == 'i')
-		ft_decimal(ptr);
-	else if (flag == 'x' || flag == 'X' || flag == 'u')
-		ft_u_decimal(flag, ptr);
-	else if (flag == 'p')
-		ft_putptr(ptr);
+	if (strc->flag == 's' || strc->flag == 'c')
+		ft_print_chars(ptr, strc);
+	else if (strc->flag == 'd' || strc->flag == 'i')
+		ft_decimal(ptr, strc);
+	else if (strc->flag == 'x' || strc->flag == 'X' || strc->flag == 'u')
+		ft_u_decimal(ptr, strc);
+	else if (strc->flag == 'p')
+		ft_putptr(ptr, strc);
 }
 
-void	ft_putnbr(unsigned long int nbr, int base, int alpha)
+void	ft_putnbr(unsigned long int nbr, t_struct *strc)
 {
-	if (nbr >= (unsigned long int) base)
-		ft_putnbr(nbr / base, base, alpha);
-	if (nbr % base >= 10)
-		ft_putchar (nbr % base - 10 + alpha);
+	if (nbr >= (unsigned long int) strc->base)
+		ft_putnbr(nbr / strc->base, strc);
+	if (nbr % strc->base >= 10)
+		ft_putchar (nbr % strc->base - 10 + strc->alpha, strc);
 	else
-		ft_putchar(nbr % base + '0');
+		ft_putchar(nbr % strc->base + '0', strc);
 }

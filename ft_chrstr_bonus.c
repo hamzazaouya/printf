@@ -6,7 +6,7 @@
 /*   By: hazaouya <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/04 18:22:11 by hazaouya          #+#    #+#             */
-/*   Updated: 2022/01/05 14:12:17 by hazaouya         ###   ########.fr       */
+/*   Updated: 2022/01/05 18:32:04 by hazaouya         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,54 +22,54 @@ int	ft_strlen(char *str)
 	return (i);
 }
 
-void	ft_make_str(va_list ptr)
+void	ft_make_str(va_list ptr, t_struct *strc)
 {
 	char	*str;
 	int		len;
 
 	str = va_arg(ptr, char *);
-	if (!str && strc.dot != -1)
+	if (!str && strc->dot != -1)
 	{
-		ft_print_ch(' ', strc.minfild);
-		ft_print_str(str, strc.dot);
+		ft_print_ch(' ', strc->minfild, strc);
+		ft_print_str(str, strc->dot, strc);
 	}
-	else if (!str && strc.dot == -1)
+	else if (!str && strc->dot == -1)
 	{
-		ft_print_ch(' ', strc.minfild - 6);
-		ft_putstr(str, 6);
+		ft_print_ch(' ', strc->minfild - 6, strc);
+		ft_putstr(str, 6, strc);
 	}
 	else
 	{
 		len = ft_strlen(str);
-		if (strc.dot != -1 && len > strc.dot)
-			len = strc.dot;
-		ft_print_str(str, len);
+		if (strc->dot != -1 && len > strc->dot)
+			len = strc->dot;
+		ft_print_str(str, len, strc);
 	}
 }
 
-void	ft_print_chars(char flag, va_list ptr)
+void	ft_print_chars(va_list ptr, t_struct *strc)
 {
-	if (flag == 'c')
+	if (strc->flag == 'c')
 	{
-		if (strc.minus)
-			ft_putchar(va_arg(ptr, int));
-		ft_print_ch(' ', strc.minfild - 1);
-		if (!strc.minus)
-			ft_putchar(va_arg(ptr, int));
+		if (strc->minus)
+			ft_putchar(va_arg(ptr, int), strc);
+		ft_print_ch(' ', strc->minfild - 1, strc);
+		if (!strc->minus)
+			ft_putchar(va_arg(ptr, int), strc);
 	}
 	else
-		ft_make_str(ptr);
+		ft_make_str(ptr, strc);
 }
 
-void	ft_print_str(char *str, int len)
+void	ft_print_str(char *str, int len, t_struct *strc)
 {
 	int	i;
 
 	i = 0;
-	if (strc.minus)
-		ft_putstr(str, len);
-	while (i++ < (strc.minfild - len))
-		ft_putchar(' ');
-	if (!strc.minus)
-		ft_putstr(str, len);
+	if (strc->minus)
+		ft_putstr(str, len, strc);
+	while (i++ < (strc->minfild - len))
+		ft_putchar(' ', strc);
+	if (!strc->minus)
+		ft_putstr(str, len, strc);
 }
