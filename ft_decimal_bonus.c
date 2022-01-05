@@ -6,7 +6,7 @@
 /*   By: hazaouya <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/04 15:15:43 by hazaouya          #+#    #+#             */
-/*   Updated: 2022/01/05 19:33:00 by hazaouya         ###   ########.fr       */
+/*   Updated: 2022/01/05 20:20:18 by hazaouya         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ void	ft_print_decimal(int num, t_struct *strc)
 	if (num < 0)
 	{
 		ft_putchar('-', strc);
-		ft_putdgt(-num, strc);
+		ft_putdgt((unsigned int) -num, strc);
 	}else
 		ft_putdgt(num, strc);
 }
